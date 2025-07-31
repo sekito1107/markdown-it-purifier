@@ -1,0 +1,39 @@
+{
+  "name": "markdown-it-purifier",
+  "version": "1.0.0",
+  "description": "A markdown-it plugin that sanitizes html_block and html_inline tokens using DOMPurify.",
+  "main": "dist/index.js",
+  "keywords": [
+    "markdown-it",
+    "plugin",
+    "sanitize",
+    "dompurify",
+    "markdown",
+    "html"
+  ],
+  "author": "sekito1107",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sekito1107/markdown-it-dompurify-plugin.git"
+  },
+  "peerDependencies": {
+    "dompurify": "^3.2.6",
+    "markdown-it": "^13.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "babel-jest": "^30.0.5",
+    "jest": "^30.0.5"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir dist"
+  },
+  "dependencies": {
+    "jsdom": "^26.1.0"
+  }
+}

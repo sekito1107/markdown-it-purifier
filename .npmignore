@@ -1,0 +1,10 @@
+test/
+src/
+coverage/
+babel.config.js
+jest.config.json
+node_modules/
+package-lock.json
+.git/
+.gitignore
+.npmignore
