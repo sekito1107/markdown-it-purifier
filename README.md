@@ -24,7 +24,7 @@ npm install markdown-it-purifier dompurify
 import MarkdownIt from 'markdown-it'
 import markdownItPurifier from 'markdown-it-purifier'
 
-const md = new MarkdownIt()
+const md = new MarkdownIt({ html: true })
 
 md.use(markdownItPurifier, {
   // These options are passed directly to DOMPurify
