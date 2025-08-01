@@ -1,8 +1,8 @@
 import MarkdownIt from 'markdown-it'
-import plugin from '../index.js'
+import purifier from '../dist/index.node.js'
 
 function render(mdText, options = {}) {
-  const md = new MarkdownIt({ html: true }).use(plugin, options);
+  const md = new MarkdownIt({ html: true }).use(purifier, options);
   return md.render(mdText);
 }
 

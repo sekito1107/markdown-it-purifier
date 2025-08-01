@@ -1,40 +1,33 @@
-"use strict";
+import createDOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = markdownItPurifier;
-var _dompurify = _interopRequireDefault(require("dompurify"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-let DOMPurify;
-if (typeof window === 'undefined') {
-  const {
-    JSDOM
-  } = require('jsdom');
-  DOMPurify = (0, _dompurify.default)(window);
-} else {
-  DOMPurify = (0, _dompurify.default)(window);
-}
-function markdownItPurifier(md, options = {}) {
+const { window } = new JSDOM('');
+const DOMPurify = createDOMPurify(window);
+
+export default function markdownItPurifier(md, options = {}) {
   md.core.ruler.push('sanitize', function (state) {
-    state.tokens.forEach(token => {
+    state.tokens.forEach((token) => {
       if (token.type === 'html_block') {
         token.content = DOMPurify.sanitize(token.content, options);
       }
+
       if (token.type === 'inline' && token.children) {
         const sanitizedChildren = [];
         let buffer = '';
         let inHtmlBlock = false;
-        token.children.forEach(child => {
+
+        token.children.forEach((child) => {
           const isStartTag = /^<[^/][^>]*>$/.test(child.content);
           const isEndTag = /^<\/[^>]+>$/.test(child.content);
+
           if (inHtmlBlock) {
             buffer += child.content;
+
             if (isEndTag) {
               sanitizedChildren.push({
                 type: 'html_inline',
                 content: DOMPurify.sanitize(buffer, options),
-                level: child.level
+                level: child.level,
               });
               buffer = '';
               inHtmlBlock = false;
@@ -48,13 +41,15 @@ function markdownItPurifier(md, options = {}) {
             }
           }
         });
+
         if (buffer.length > 0) {
           sanitizedChildren.push({
             type: 'html_inline',
             content: DOMPurify.sanitize(buffer, options),
-            level: 0
+            level: 0,
           });
         }
+
         token.children = sanitizedChildren;
       }
     });
