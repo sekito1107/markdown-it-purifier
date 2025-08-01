@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-purifier",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A markdown-it plugin that sanitizes html_block and html_inline tokens using DOMPurify.",
   "main": "dist/index.js",
   "keywords": [

@@ -5,13 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = markdownItPurifier;
 var _dompurify = _interopRequireDefault(require("dompurify"));
-var _jsdom = require("jsdom");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 let DOMPurify;
 if (typeof window === 'undefined') {
   const {
-    window
-  } = new _jsdom.JSDOM('');
+    JSDOM
+  } = require('jsdom');
   DOMPurify = (0, _dompurify.default)(window);
 } else {
   DOMPurify = (0, _dompurify.default)(window);

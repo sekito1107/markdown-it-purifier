@@ -1,10 +1,9 @@
 import createDOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
 
 let DOMPurify;
 
 if (typeof window === 'undefined') {
-  const { window } = new JSDOM('');
+  const { JSDOM } = require('jsdom');
   DOMPurify = createDOMPurify(window);
 } else {
   DOMPurify = createDOMPurify(window);
